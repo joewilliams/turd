@@ -3,7 +3,7 @@ require 'rake/gempackagetask'
 
 spec = Gem::Specification.new do |s|
   s.name = "turd"
-  s.version = "0.1"
+  s.version = Turd::VERSION
   s.author = "joe williams"
   s.email = "joe@joetify.com"
   s.homepage = "http://github.com/joewilliams/turd"
