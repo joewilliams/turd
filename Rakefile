@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake/gempackagetask'
+require './lib/turd/version.rb'
 
 spec = Gem::Specification.new do |s|
   s.name = "turd"
