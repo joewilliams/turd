@@ -29,6 +29,12 @@ module Turd
                 raise "#{option} substring failure. expected #{v}, got #{response.options[option]}"
               end
             end
+          elsif option.to_s.include?("_time")
+            if response.options[option] > value
+              raise "#{option} timing value was greater than allowed. expected #{value}, got #{response.options[option]}"
+            else
+              # do nothing
+            end
           else
             if response.options[option] == value
               # do nothing

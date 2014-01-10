@@ -41,7 +41,8 @@ request_definition = {
 }
 
 response_definition = {
-  :response_code => 200
+  :response_code => 200,
+  :total_time => 1.0
 }
 
 puts "running #{request_definition[:type]} test #{request_definition[:id]} ..."
