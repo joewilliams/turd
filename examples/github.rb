@@ -1,6 +1,34 @@
 require "../lib/turd"
 require 'pp'
 
+## you should get output like:
+
+## joe@hubboxxx ~/src/turd/examples $ ruby github.rb
+## running http test github.com blah blah ...
+## ******* here's some http response data (partial) you can use
+## {:httpauth_avail=>0,
+##  :total_time=>0.563128,
+##  :starttransfer_time=>0.560763,
+##  :appconnect_time=>0.459929,
+##  :pretransfer_time=>0.46002,
+##  :connect_time=>0.119582,
+##  :namelookup_time=>0.032303,
+##  :effective_url=>"https://github.com/",
+##  :primary_ip=>"192.30.252.129",
+##  :response_code=>200,
+##  :redirect_count=>0,
+##  :return_code=>:ok,
+##  :debug_info=>#<Ethon::Easy::DebugInfo:0x007f9d72afaef8 @messages=[]>}
+## *******
+##
+## running http test github.com svn ...
+## running http test github.com git upload pack ...
+## running tcp test github.com ssh tcp ...
+## ******* here's some tcp response data you can use
+## {:response=>"SSH-2.0-OpenSSH_5.9p1 Debian-5ubuntu1+github5\r\n",
+##  :total_time=>0.18630385398864746}
+## *******
+
 # normal http
 
 request_definition = {
