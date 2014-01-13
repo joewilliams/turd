@@ -25,10 +25,11 @@ module Turd
         response = Turd::Http.request(request_definition)
       when "tcp"
         response = Turd::Tcp.connect(request_definition)
+      else
+        raise "No request type defined!"
       end
 
       Turd::Assert.assert(request_definition, response, response_definition)
-      response
     end
 
   end

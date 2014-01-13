@@ -10,9 +10,9 @@ module Turd
           if option == :response
             value.each do |v|
               if response[:response].include?(v)
-                # do nothing
+                return response
               else
-                raise "#{option} substring failure. expected #{v}, got #{response}"
+                raise AssertionFailure.new(response), "#{option} substring failure. expected #{v}, got #{response}"
               end
             end
           end
@@ -24,27 +24,40 @@ module Turd
           if option == :response_headers || option == :response_body
             value.each do |v|
               if response.options[option].include?(v)
-                # do nothing
+                return return_http_response(response)
               else
-                raise "#{option} substring failure. expected #{v}, got #{response.options[option]}"
+                raise AssertionFailure.new(return_http_response(response)), "#{option} substring failure. expected #{v}, got #{response.options[option]}"
               end
             end
           elsif option.to_s.include?("_time")
             if response.options[option] > value
-              raise "#{option} timing value was greater than allowed. expected #{value}, got #{response.options[option]}"
+              raise AssertionFailure.new(return_http_response(response)), "#{option} timing value was greater than allowed. expected #{value}, got #{response.options[option]}"
             else
-              # do nothing
+              return return_http_response(response)
             end
           else
             if response.options[option] == value
-              # do nothing
+              return return_http_response(response)
             else
-              raise "#{option} did not match response definition. expected #{value}, got #{response.options[option]}"
+              raise AssertionFailure.new(return_http_response(response)), "#{option} did not match response definition. expected #{value}, got #{response.options[option]}"
             end
           end
         end
       end
 
+    end
+
+    def self.return_http_response(response)
+      response.options.delete(:debug_info)
+      response.options
+    end
+  end
+
+  class AssertionFailure < RuntimeError
+    attr :response
+
+    def initialize(response)
+      @response = response
     end
   end
 end
