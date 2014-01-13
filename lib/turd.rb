@@ -10,9 +10,9 @@ $LOAD_PATH.unshift __DIR__ unless
   $LOAD_PATH.include?(__DIR__) ||
   $LOAD_PATH.include?(File.expand_path(__DIR__))
 
+require 'turd/assert'
 require 'turd/http'
 require 'turd/tcp'
-require 'turd/assert'
 require 'turd/version'
 
 module Turd

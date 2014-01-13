@@ -15,6 +15,12 @@ module Turd
                 raise AssertionFailure.new(response), "#{option} substring failure. expected #{v}, got #{response}"
               end
             end
+          elsif option == :total_time
+            if response[:total_time] > value
+              raise AssertionFailure.new(response), "#{option} timing value was greater than allowed. expected #{value}, got #{response[:total_time]}"
+            else
+              return response
+            end
           end
         end
 
