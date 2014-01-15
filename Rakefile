@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 require './lib/turd/version.rb'
 
 spec = Gem::Specification.new do |s|
@@ -17,6 +17,7 @@ spec = Gem::Specification.new do |s|
   %w{typhoeus}.each { |gem| s.add_dependency gem }
 end
 
-Rake::GemPackageTask.new(spec) do |pkg|
+Gem::PackageTask.new(spec) do |pkg|
   pkg.need_tar = true
 end
+
