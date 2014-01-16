@@ -49,11 +49,11 @@ puts "running #{request_definition[:type]} test #{request_definition[:id]} ..."
 
 result = Turd.run(request_definition, response_definition)
 
-result.options.delete(:response_headers)
-result.options.delete(:response_body)
+result.delete(:response_headers)
+result.delete(:response_body)
 
 puts "******* here's some http response data (partial) you can use"
-PP.pp result.options
+PP.pp result
 puts "*******"
 puts
 
