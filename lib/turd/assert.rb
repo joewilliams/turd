@@ -12,11 +12,13 @@ module Turd
               if response[:response].include?(v)
                 return response
               else
+                response.stored(:failed, option)
                 raise AssertionFailure.new(response), "#{option} substring failure. expected #{v}, got #{response}"
               end
             end
           elsif option == :total_time
             if response[:total_time] > value
+              response.stored(:failed, option)
               raise AssertionFailure.new(response), "#{option} timing value was greater than allowed. expected #{value}, got #{response[:total_time]}"
             else
               return response
@@ -32,11 +34,13 @@ module Turd
               if response.options[option].include?(v)
                 return return_http_response(response)
               else
+                response.options.store(:failed, option)
                 raise AssertionFailure.new(return_http_response(response)), "#{option} substring failure. expected #{v}, got #{response.options[option]}"
               end
             end
           elsif option.to_s.include?("_time")
             if response.options[option] > value
+              response.options.store(:failed, option)
               raise AssertionFailure.new(return_http_response(response)), "#{option} timing value was greater than allowed. expected #{value}, got #{response.options[option]}"
             else
               return return_http_response(response)
@@ -45,6 +49,7 @@ module Turd
             if response.options[option] == value
               return return_http_response(response)
             else
+              response.options.store(:failed, option)
               raise AssertionFailure.new(return_http_response(response)), "#{option} did not match response definition. expected #{value}, got #{response.options[option]}"
             end
           end
