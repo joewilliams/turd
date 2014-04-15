@@ -31,9 +31,7 @@ module Turd
 
           if option == :response_headers || option == :response_body
             value.each do |v|
-              if response.options[option].include?(v)
-                return return_http_response(response)
-              else
+              if !response.options[option].include?(v)
                 response.options.store(:failed, option)
                 raise AssertionFailure.new(return_http_response(response)), "#{option} substring failure. expected #{v}, got #{response.options[option]}"
               end
@@ -42,13 +40,9 @@ module Turd
             if response.options[option] > value
               response.options.store(:failed, option)
               raise AssertionFailure.new(return_http_response(response)), "#{option} timing value was greater than allowed. expected #{value}, got #{response.options[option]}"
-            else
-              return return_http_response(response)
             end
           else
-            if response.options[option] == value
-              return return_http_response(response)
-            else
+            if response.options[option] != value
               response.options.store(:failed, option)
               raise AssertionFailure.new(return_http_response(response)), "#{option} did not match response definition. expected #{value}, got #{response.options[option]}"
             end
@@ -56,6 +50,7 @@ module Turd
         end
       end
 
+      return return_http_response(response)
     end
 
     def self.return_http_response(response)
