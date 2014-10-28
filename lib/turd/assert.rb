@@ -12,13 +12,13 @@ module Turd
               if response[:response].include?(v)
                 return response
               else
-                response.stored(:failed, option)
+                response.store(:failed, option)
                 raise AssertionFailure.new(response), "#{option} substring failure. expected #{v}, got #{response}"
               end
             end
           elsif option == :total_time
             if response[:total_time] > value
-              response.stored(:failed, option)
+              response.store(:failed, option)
               raise AssertionFailure.new(response), "#{option} timing value was greater than allowed. expected #{value}, got #{response[:total_time]}"
             else
               return response
