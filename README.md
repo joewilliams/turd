@@ -1,3 +1,5 @@
+![](https://dl.dropboxusercontent.com/s/a5zwyafzdkl2v9v/2015-10-26%20at%207.50%20AM.png)
+
 ### turd
 
 Turd is a little wrapper around typhoeus which is a wrapper around curb which is a wrapper around libcurl which is a wrapper around tcp which is a wrapper around electrons and shit. You can use turd to test http requests and responses. We use it at GitHub to validate responses from various services and alert us if they do not conform to the expected responses. http integration tests if you will. It can be also used for basic telnet-like plain text request validations. Lastly, it also produces some basic diagnostic data like various timings from libcurl.
