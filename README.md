@@ -1,4 +1,4 @@
-![](https://dl.dropboxusercontent.com/s/aur3e9a0digi2md/2016-01-15%20at%201.25%20PM.png)
+![](https://raw.githubusercontent.com/joewilliams/turd/master/mira.jpg)
 
 ### turd
 
