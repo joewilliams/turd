@@ -14,7 +14,7 @@ spec = Gem::Specification.new do |s|
   s.require_path = "lib"
   s.has_rdoc = true
   s.extra_rdoc_files = ["README.md"]
-  %w{typhoeus}.each { |gem| s.add_dependency gem }
+  %w{typhoeus net-ssh}.each { |gem| s.add_dependency gem }
 end
 
 Gem::PackageTask.new(spec) do |pkg|
