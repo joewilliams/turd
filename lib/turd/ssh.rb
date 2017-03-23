@@ -8,11 +8,15 @@ module Turd
       username = options.fetch(:username)
       command = options.fetch(:command)
       stdin = options.fetch(:stdin, nil)
-      # todo - :keys => filenames or :key_data => PEM id data
+      key = options.fetch(:key, nil)
+
       response = {:stdout => "", :stderr => ""}
+      ssh_options = key ? {:keys_only => true, :key_data => [key], :keys => [], :use_agent => false} : {}
+      ssh_options[:non_interactive] = true
+
       started = Time.now.to_f
       connected = exited = stdout_started = nil
-      Net::SSH.start(host, username) do |ssh|
+      Net::SSH.start(host, username, ssh_options) do |ssh|
         connected = Time.now.to_f
         ssh.open_channel do |channel|
           channel.exec(command) do |ch, success|
