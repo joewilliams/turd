@@ -12,6 +12,7 @@ $LOAD_PATH.unshift __DIR__ unless
 
 require 'turd/assert'
 require 'turd/http'
+require 'turd/ssh'
 require 'turd/tcp'
 require 'turd/version'
 
@@ -25,6 +26,8 @@ module Turd
         response = Turd::Http.request(request_definition)
       when "tcp"
         response = Turd::Tcp.connect(request_definition)
+      when "ssh"
+        response = Turd::SSH.connect(request_definition)
       else
         raise "No request type defined!"
       end

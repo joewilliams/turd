@@ -48,6 +48,25 @@ module Turd
             end
           end
         end
+
+      when "ssh"
+        response_definition.each do |option, value|
+          case option
+          when :exit_status
+            if response[:exit_status] != value
+              response.store(:failed, option)
+              raise AssertionFailure.new(response), "Expected exit status of #{value} but got #{response[:exit_status].inspect}"
+            end
+          when :stdout
+            value.each do |v|
+              if !response[:stdout].include?(v)
+                response.store(:failed, option)
+                raise AssertionFailure.new(response), "Expected stdout to include #{v.inspect}"
+              end
+            end
+          end
+        end
+        return response
       end
 
       return return_http_response(response)
